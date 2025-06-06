@@ -1,0 +1,108 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Recommender</title>
+    <link rel="stylesheet" href="{% static 'main/css/main.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+             <nav class="navigation">
+                <ul>
+                    <li><a href="{% url 'home' %}">Главная</a></li>
+                    <li><a href="{% url 'form' %}">Рекомендации</a></li>
+                    <li><a href="{% url 'about' %}">О TMDb</a></li>
+                </ul>
+        </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <section class="about">
+                <h2>О нашей нейросети</h2>
+                <p>
+                    Movie Recommender — это интеллектуальный рекомендательный сервис, разработанный с использованием алгоритмов машинного обучения.
+                    Наша нейросеть анализирует огромные объемы данных о фильмах, жанрах, рейтингах и пользовательских предпочтениях, чтобы
+                    предсказать, какие фильмы, скорее всего, понравятся именно вам. Мы используем API TMDb для получения актуальной информации
+                    о тысячах фильмов, включая их длительность, жанры, рейтинг и дату выхода.
+                </p>
+                <p>
+                    Благодаря нашей системе, вы экономите время на поиске интересного контента, а рекомендации становятся более точными с каждым использованием.
+                </p>
+            </section>
+
+<!--            <section class="interactive">-->
+<!--                <h2>Попробуйте наш интерактивный элемент</h2>-->
+<!--                <button id="show-message">Нажмите меня!</button>-->
+<!--                <p id="message" style="display: none;">Спасибо за то, что нажали кнопку!</p>-->
+<!--            </section>-->
+
+            <section class="features">
+                <h2>Возможности нашего сервиса</h2>
+                <ul>
+                    <li><strong>Персонализированные рекомендации:</strong> система анализирует ваш вкус и предлагает фильмы, которые вам действительно подойдут.</li>
+                    <li><strong>Адаптивный интерфейс:</strong> сайт удобно использовать как с компьютера, так и с мобильных устройств.</li>
+                    <li><strong>Доступ к информации в реальном времени:</strong> мы используем API TMDb, чтобы вы всегда получали свежие данные.</li>
+                    <li><strong>Умная фильтрация:</strong> выбирайте предпочтительные жанры, длительность фильма и даже желаемый рейтинг.</li>
+                    <li><strong>Высокая производительность:</strong> система обрабатывает запросы быстро даже при большом количестве данных.</li>
+                </ul>
+            </section>
+
+            <section class="testimonials">
+                <h2>Отзывы пользователей</h2>
+                {% if testimonials %}
+                    {% for review in testimonials %}
+                        <blockquote>
+                            <p>“{{ review.text }}”</p>
+                            <cite>— {{ review.author }}</cite>
+                        </blockquote>
+                    {% endfor %}
+                {% else %}
+                    <p>Пока нет отзывов. Будьте первым, кто оставит своё мнение!</p>
+                {% endif %}
+            </section>
+
+            <section class="popular-movies">
+                <h2>Популярные фильмы</h2>
+                <div class="movie-grid">
+                    {% if popular_movies %}
+                        {% for movie in popular_movies %}
+                            <div class="movie-item">
+                               <img src="{{ movie.image.url }}" alt="{{ movie.title }}" loading="lazy">
+                                <h3>{{ movie.title }}</h3>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p>Пока нет популярных фильмов.</p>
+                    {% endif %}
+                </div>
+            </section>
+
+            <section class="subscribe">
+                <h2>Подпишитесь на обновления</h2>
+                <form>
+                    <input type="email" placeholder="Введите вашу почту">
+                    <button type="submit">Подписаться</button>
+                </form>
+            </section>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <p>© 2024 Movie Recommender</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+
+    </script>
+</body>
+</html>

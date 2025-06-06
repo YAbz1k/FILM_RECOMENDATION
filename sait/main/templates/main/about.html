@@ -1,0 +1,113 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>О базе данных TMDb</title>
+    <!-- Подключаем главный CSS -->
+    <link rel="stylesheet" href="{% static 'main/css/main.css' %}">
+</head>
+<body>
+    <!-- Header (тот же, что на главной) -->
+    <header class="main-header">
+        <div class="container">
+            <nav class="navigation">
+                <ul>
+                    <li><a href="{% url 'home' %}">Главная</a></li>
+                    <li><a href="{% url 'form' %}">Рекомендации</a></li>
+                    <li><a href="{% url 'about' %}">О TMDb</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+
+
+            {% if tmdb_blocks %}
+                {% for block in tmdb_blocks %}
+                    <section class="tmdb-info-block">
+                        <!-- Заголовок блока по центру -->
+                        <h2 class="tmdb-block-title">{{ block.title }}</h2>
+
+                        <!-- Flex-контейнер: картинка слева, текст справа -->
+                        <div class="tmdb-row">
+                            <div class="tmdb-image">
+                                <img src="{{ block.image.url }}" alt="{{ block.title }}">
+                            </div>
+                            <div class="tmdb-text">
+                                <p>{{ block.text }}</p>
+                            </div>
+                        </div>
+                    </section>
+                {% endfor %}
+            {% else %}
+                <p>Информация временно недоступна.</p>
+            {% endif %}
+
+            <section class="tmdb-info">
+            <div class="tmdb-block">
+                <h2>Преимущества TMDb</h2>
+                <p>Платформа The Movie Database (TMDb) предоставляет актуальную и подробную информацию о кино, телесериалах и персонах киноиндустрии. Её основной плюс — это огромная активная база пользователей, которая регулярно обновляет и дополняет данные.</p>
+                <p>Кроме данных о фильмах, TMDb предлагает рейтинги, рецензии, трейлеры, постеры и даже API для разработчиков, что делает платформу универсальной для киноманов и разработчиков приложений. Благодаря поддержке множества языков и сообществу по всему миру, TMDb подходит для пользователей из разных стран и культур.</p>
+            </div>
+        </section>
+
+       <section class="tmdb-video">
+          <h2>Узнайте больше о TMDb</h2>
+          <div class="video-container">
+            <div class="video-wrapper">
+              <iframe
+                src="https://rutube.ru/play/embed/7c5d5e8eb961e7167d10566ee2843e69/"
+                frameborder="0"
+                allow="clipboard-write; autoplay"
+                webkitAllowFullScreen mozallowfullscreen allowFullScreen>
+              </iframe>
+            </div>
+          </div>
+        </section>
+
+
+
+
+
+
+            <section class="tmdb-facts">
+                <h2>Интересные факты о TMDb</h2>
+                <ul>
+                    <li>TMDb был основан в 2008 году и с тех пор стал одним из крупнейших источников данных о фильмах.</li>
+                    <li>На платформе зарегистрировано более 100 миллионов пользователей.</li>
+                    <li>Ежедневно добавляются тысячи новых записей о фильмах и сериалах.</li>
+                </ul>
+            </section>
+
+            <section class="tmdb-links">
+                <h2>Полезные ссылки</h2>
+                <div class="links-grid">
+                    <a href="https://www.themoviedb.org/documentation/api" target="_blank" class="link-card">
+                        <h3>Документация API</h3>
+                        <p>Информация о том, как использовать TMDb API в вашем проекте.</p>
+                    </a>
+                    <a href="https://www.themoviedb.org/about" target="_blank" class="link-card">
+                        <h3>О платформе TMDb</h3>
+                        <p>Подробности о миссии и истории платформы.</p>
+                    </a>
+                    <a href="https://www.themoviedb.org/discuss" target="_blank" class="link-card">
+                        <h3>Форум сообщества</h3>
+                        <p>Обсудите любимые фильмы и новые релизы с другими пользователями.</p>
+                    </a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <p>© 2024 Movie Recommender</p>
+        </div>
+    </footer>
+</body>
+</html>

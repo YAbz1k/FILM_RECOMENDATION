@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="{% static 'main/css/main.css' %}">
+  <title>Рекомендации</title>
+</head>
+<body>
+
+
+
+  <header class="main-header">
+        <div class="container">
+            <nav class="navigation">
+                <ul>
+                    <li><a href="{% url 'home' %}">Главная</a></li>
+                    <li><a href="{% url 'form' %}">Рекомендации</a></li>
+                    <li><a href="{% url 'about' %}">О TMDb</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+
+  <div class="container">
+
+
+
+
+
+
+
+    <form action="{% url 'form' %}" method="post" class="recommendation-form">
+      {% csrf_token %}
+      <label>Жанры (ID через пробел):</label><br>
+      <input type="text" name="genres" placeholder="12 18" required><br><br>
+
+      <label>Популярность (да/нет):</label><br>
+      <input type="text" name="popularity" placeholder="да или нет" required><br><br>
+
+      <label>Длительность (короткий/средний/длинный):</label><br>
+      <input type="text" name="runtime" placeholder="средний" required><br><br>
+
+      <button type="submit">Получить</button>
+    </form>
+
+    {% if recommendations is not None %}
+      <hr>
+
+      <!-- ОБЕРНЁМ В DIV С КЛАССОМ .recommendations -->
+      <div class="recommendations">
+        <p><strong>Найдено {{ recommendations|length }} фильмов</strong></p>
+
+        {% if recommendations %}
+          <ul class="recommendations__list">
+            {% for title, rating in recommendations %}
+              <li class="recommendations__item">
+                <span class="recommendations__title">{{ title }}</span>
+                {% if rating %}
+                  <span class="recommendations__rating"> (Рейтинг: {{ rating }})</span>
+                {% endif %}
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p class="recommendations__empty">К сожалению, ничего не подошло.</p>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</body>
+</html>
